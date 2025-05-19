@@ -53,6 +53,7 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 **/appsettings.json
+**/appsettings*.json
 **/k8s
 **/*deployment.yaml
 **/*service.yaml
