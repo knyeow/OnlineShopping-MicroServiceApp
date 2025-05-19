@@ -1,0 +1,158 @@
+ProductService:
+    host: localhost:5001
+
+    Apis:
+        Get -Get all:
+            -Http://host/api/Product
+        
+        Response:
+        [
+            {
+                "id": 1,
+                "name": "masa",
+                "price": 200,
+                "stock": 10,
+                "imageUrl": "https://knyeowstorage.blob.core.windows.net/productimages/masa.jpg"
+            },
+            {
+                "id": 2,
+                "name": "sandalye",
+                "price": 101,
+                "stock": 2,
+                "imageUrl": "https://knyeowstorage.blob.core.windows.net/productimages/chair.jpg"
+            },
+            {
+                "id": 3,
+                "name": "yastik",
+                "price": 101,
+                "stock": 5,
+                "imageUrl": "https://knyeowstorage.blob.core.windows.net/productimages/yastik.jpg"
+            }
+        ]
+
+UserService:
+    host: localhost:5000
+
+    Apis:
+        Get -Get by ID
+            -Http://host/api/user/{id}
+    
+        Response:
+        {
+            "id": 1,
+            "name": "Ege",
+            "surname": "Yasar",
+            "email": "ege.yasar37@gmail.com",
+            "password": "ege123",
+            "balance": 91
+        }
+
+        Get -Get me (by auth)
+            -Http://host/api/user/me
+
+            #Requires auth key
+
+            Response:
+            {
+                "id": 1,
+                "name": "Ege",
+                "surname": "Yasar",
+                "email": "ege.yasar37@gmail.com",
+                "password": "ege123",
+                "balance": 91
+            }
+
+        Post -Login:
+            -Http://host/api/login/login
+
+            Request:
+                Body:
+                {
+                    "Email" : "ege.yasar37@gmail.com",
+                    "Password": "ege123"
+                }
+
+            Response:
+            {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJlZ2UueWFzYXIzN0BnbWFpbC5jb20iLCJleHAiOjE3NDc1MjA3MTYsImlzcyI6InlvdXJjb21wYW55LmNvbSIsImF1ZCI6InlvdXJjb21wYW55LmNvbSJ9.lLDw4zT0XIzMOisc9piUXzfqgHROKabfHE-d5hY9ZTQ"
+            }
+                #Crypted Informations : Email,UserId
+        
+        Register:
+            -Http://host/api/login/register
+
+            Request:
+                Body:
+                {
+                    "Email" : "ege.yasar32@gmail.com",
+                    "Name": "yasar",
+                    "Surname": "yasamaz",
+                    "Password": "ege123"
+                }
+
+            Response:Message of Status of register (error or succes, if error reason of it) (if name is empty first word of error will name or what else so can be tagged in client)
+
+OrderService:
+    host: localhost:5002
+
+    Apis:
+        Get Orders:
+            -Http://host/api/order/user
+
+                #Request is Authorized and must include a jwt token (from login)
+
+            Response:
+            [
+                {
+                    "userId": 1,
+                    "orderDate": "2025-05-02T00:00:00",
+                    "orderId": 1,
+                    "productDto": {
+                        "id": 2,
+                        "name": "sandalye",
+                        "price": 101,
+                        "stock": 2,
+                        "imageUrl": "https://knyeowstorage.blob.core.windows.net/productimages/chair.jpg"
+                    }
+                },
+                {
+                    "userId": 1,
+                    "orderDate": "1905-07-12T00:00:00",
+                    "orderId": 2,
+                    "productDto": {
+                        "id": 2,
+                        "name": "sandalye",
+                        "price": 101,
+                        "stock": 2,
+                        "imageUrl": "https://knyeowstorage.blob.core.windows.net/productimages/chair.jpg"
+                    }
+                }
+            ]
+
+        Post -Give Orders:
+            -Http://host/api/order
+
+                #Request is Authorized and must include a jwt token (from login)
+
+            Request:
+                Body:
+                    {
+                        "productValues": [
+                            {
+                                "productId": 3,
+                                "productAmount": 5
+                            },
+                            {
+                                "productId":2,
+                                "productAmount":4
+                            }
+                        ]
+                    }
+
+            Response:
+                Message to status of the order
+
+
+
+
+

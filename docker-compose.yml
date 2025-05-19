@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+  productservice:
+    build:
+      context: .
+      dockerfile: src/ProductService/Dockerfile
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      
+  userservice:
+    build:
+      context: .
+      dockerfile: src/UserService/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+
+  orderservice:
+    build:
+      context: .
+      dockerfile: src/OrderService/Dockerfile
+    ports:
+      - "5002:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - productservice
+      - userservice

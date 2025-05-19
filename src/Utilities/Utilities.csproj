@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>8934e9ec-3046-49ae-beec-8d6936a373e1</UserSecretsId>
+    <Version>1.6.0</Version>
+    <Authors>knyeow</Authors>
+    <Company>knyeow</Company>
+    <PackageId>PrivateUtilities</PackageId>
+    <Description>Simple Utilities.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
+  </ItemGroup>
+
+</Project>
